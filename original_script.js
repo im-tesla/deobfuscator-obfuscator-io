@@ -8,4 +8,5 @@ function showPageInfo() {
   console.log("🔠 First H1 text:", heading);
 }
 
+
 showPageInfo();
