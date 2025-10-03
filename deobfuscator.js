@@ -179,6 +179,17 @@ class Deobfuscator {
 
     // Format code for better readability
     formatCode(code) {
+        // Simplify simple string concatenations like 'a'+'b'+'c'
+        let changed;
+        do {
+            changed = false;
+            const newCode = code.replace(/'([^']*)'\s*\+\s*'([^']*)'/g, (match, str1, str2) => {
+                changed = true;
+                return `'${str1}${str2}'`;
+            });
+            code = newCode;
+        } while (changed);
+        
         // Add line breaks after semicolons for readability
         code = code.replace(/;(?=[a-zA-Z_$\[])/g, ';\n');
         
